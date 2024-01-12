@@ -5,11 +5,11 @@ import { connectToDB } from "../mongoose";
 
 interface Params {
   userId: string;
-  username: string,
-  name: string,
-  bio: string,
-  image: string,
-  path: string,
+  username: string;
+  name: string;
+  bio: string;
+  image: string;
+  path: string;
 }
 
 export async function updateUser({
@@ -42,5 +42,20 @@ export async function updateUser({
     }
   } catch (error: any) {
     throw new Error(`Failed to create/update user: ${error.message}`);
+  }
+}
+
+export async function fetchUser(userId: string) {
+  try {
+    connectToDB();
+    return await User.findOne({
+      id: userId,
+    })
+    // .populate({
+    //   path: 'communities',
+    //   model: Comunity
+    // })
+  } catch (error: any) {
+    throw new Error(`Cant fetch user. Error: ${error.message}`)
   }
 }

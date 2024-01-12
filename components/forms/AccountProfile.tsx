@@ -138,6 +138,7 @@ const AccountProfile = ({ user, btnTitle }: IProps) => {
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage/>
             </FormItem>
           )}
         />
