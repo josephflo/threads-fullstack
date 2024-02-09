@@ -10,7 +10,7 @@ import RightSideBar from '@/components/shared/RightSideBar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const medata: Metadata = {
-  title: "Threads Clone",
+  title: "Tagged, a Threads Clone Application",
   description: "A Next.js 14 Meta Threads Application",
 };
 

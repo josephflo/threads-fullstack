@@ -142,11 +142,23 @@ export async function getActivity(userId: string){
       author: userId
     })
     //collect all the child threads ids(replies) from the CHILDREN field
-    const childThreadIds = userThreads.reduce((acc)=> {
-      return acc.concat(userThread.children)
-    })
+    const childThreadIds = userThreads.reduce((acc, userThread) => {
+      return acc.concat(userThread.children);
+    }, []);
+    
+    // Find and return the child threads (replies) excluding the ones created by the same user
+    const replies = await Thread.find({
+      _id: { $in: childThreadIds },
+      author: { $ne: userId }, // Exclude threads from the actual user
+    }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
+    });
+
+    return replies;
 
   } catch (error: any) {
-    throw new Error(`Failed to fetch activities: ${error.message}`)
+    throw new Error(`Error fetching replies: ${error.message}`)
   }
 }
