@@ -137,7 +137,15 @@ sortBy?: SortOrder
 export async function getActivity(userId: string){
   try {
     connectToDB();
-    
+    // find all threads created by the user
+    const userThreads = await Thread.find({
+      author: userId
+    })
+    //collect all the child threads ids(replies) from the CHILDREN field
+    const childThreadIds = userThreads.reduce((acc)=> {
+      return acc.concat(userThread.children)
+    })
+
   } catch (error: any) {
     throw new Error(`Failed to fetch activities: ${error.message}`)
   }
