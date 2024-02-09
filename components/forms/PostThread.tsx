@@ -15,10 +15,8 @@ import * as z from "zod";
 import { Textarea } from "../ui/textarea";
 import { usePathname, useRouter } from "next/navigation";
 
-import { UserValidation } from "@/lib/validations/user";
 import { createThread } from "@/lib/actions/thread.actions";
 import { ThreadValidation } from "@/lib/validations/thread";
-
 
 interface Props {
   userId: string;
@@ -28,7 +26,7 @@ const PostThread = ({ userId }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
       thread: "",
@@ -43,8 +41,8 @@ const PostThread = ({ userId }: Props) => {
       comunityId: null,
       path: pathname,
     });
-    console.log(values.thread);
-    
+    console.log(values);
+
     router.push("/");
   };
 
@@ -52,7 +50,7 @@ const PostThread = ({ userId }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col justify-start gap-10"
+        className="flex flex-col justify-start gap-10 mt-10"
       >
         <FormField
           control={form.control}
@@ -69,10 +67,10 @@ const PostThread = ({ userId }: Props) => {
             </FormItem>
           )}
         />
+        <Button type="submit" className="bg-primary-500">
+          Post Thread
+        </Button>
       </form>
-      <Button type="submit" className="bg-primary-500">
-        Post Thread
-      </Button> 
     </Form>
   );
 };

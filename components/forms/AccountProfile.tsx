@@ -25,7 +25,7 @@ import { usePathname, useRouter } from "next/navigation";
 interface IProps {
   user: {
     id: string;
-    objecId: string;
+    objectId: string;
     username: string;
     name: string;
     bio: string;
@@ -76,8 +76,8 @@ const AccountProfile = ({ user, btnTitle }: IProps) => {
       const imgRes = await startUpload(files);
       console.log(imgRes);
 
-      if (imgRes && imgRes[0].fileUrl) {
-        values.profile_photo = imgRes[0].fileUrl;
+      if (imgRes && imgRes[0].url) {
+        values.profile_photo = imgRes[0].url;
       }}
       await updateUser({
         userId: user.id,

@@ -6,15 +6,16 @@ import Link from 'next/link'
 const TopBar = () => {
   return (
     <nav className='topbar'>
-      <Link href='/' className='flex items-center gap-4'>
+      <Link href='/' className='flex items-center gap-3 ml-2'>
         <Image 
           src={'/assets/logo.svg'}
           alt='logo'
-          width={28}
-          height={28}
+          width={42}
+          height={42}
+          className='bg-slate-50 rounded-full border border-white'
         />
         <p className='text-heading3-bold text-light-1 max-xs:hidden'>
-          Threads
+          Tagged
         </p>
       </Link>
 
