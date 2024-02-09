@@ -12,7 +12,7 @@ const TopBar = () => {
           alt='logo'
           width={42}
           height={42}
-          className='bg-slate-50 rounded-full border border-white'
+          className='rounded-full border border-white'
         />
         <p className='text-heading3-bold text-light-1 max-xs:hidden'>
           Tagged

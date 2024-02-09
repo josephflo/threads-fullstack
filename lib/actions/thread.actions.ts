@@ -8,7 +8,7 @@ import { connectToDB } from "../mongoose";
 interface Params {
   text: string;
   author: string;
-  comunityId: string | null;
+  communityId: string | null;
   path: string;
 }
 
